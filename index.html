@@ -412,9 +412,7 @@
               </nav>
               <div class="tab-content" id="nav-tabContent">
                 <div class="tab-pane fade show active " id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
-                
-                
-                  <br>
+                    <br>
                     <div class="left"></div>
                     <form name="user-info">
                     <div class="text-group">
@@ -447,9 +445,6 @@
                     </div>
                     </form> 
                   </div>
-                
-
-
                 </div>
                   <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab"><br>
                     <div class="tab-pane" id="tab2">
@@ -470,6 +465,8 @@
                               aria-controls="v-pills-vidguk" aria-selected="false">Відгуки</a>
                             <a class="nav-link list-group-item list-group-item-action list-group-item-warning" id="v-pills-port-tab" data-toggle="pill" href="#v-pills-port" role="tab"
                               aria-controls="v-pills-port" aria-selected="false">Портфоліо</a>
+                            <a class="nav-link list-group-item list-group-item-action list-group-item-warning" id="v-pills-zapis-tab" data-toggle="pill" href="#v-pills-zapis" role="tab"
+                              aria-controls="v-pills-zapis" aria-selected="false">Записна книжка</a>
                           </div>
                         </div>
                         <div class="col-10">
@@ -480,7 +477,6 @@
                             
                             <div class="tab-pane fade" id="v-pills-plata" role="tabpanel" aria-labelledby="v-pills-plata-tab">
 
-                            
                               <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
                               <script type="text/javascript">
                                 google.charts.load('current', {'packages':['corechart']});
@@ -502,7 +498,7 @@
                                     title: 'ФРОНТЕНД (джуниор)',
                                     colors: ['FDD835'],
                                     pointSize: 5,
-                                    lineWidth: 0,
+                                    lineWidth: 1,
                                     hAxis: {title: 'Місто',  titleTextStyle: {color: '#333'}},
                                     vAxis: {minValue: 0}
                                   };
@@ -511,13 +507,8 @@
                                   chart.draw(data, options);
                                 }
                               </script>
-                              <div id="chart_div" style="width: 100%; height: 500px;"></div>
-
-
+                              <div id="chart_div" style="width: 10%; height: 500px;"></div>
                             </div>
-
-                            
-
                         <div class="tab-pane fade" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab">
                             
                           <div class="row">
@@ -550,10 +541,9 @@
                             
                             <div class="tab-pane fade" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab">
                               
-                                                            
-                              <div class="center">
-                                <h3>Відповідні вакансії</h3>
-                                <form action="<?php echo $_SERVER['PHP_SELF'];?>" method="GET">
+                                <div class="center">
+                                    <form action="<?php echo $_SERVER['PHP_SELF'];?>" method="GET">
+                                    
                                     <label>Оберіть навик: 
                                         <select name="skill">
                                         <option value="wait">...</option>
@@ -563,7 +553,8 @@
                                     </label><br /><br />
                                     <input type="submit" value="Відповідні вакансії" />
                                 </form>
-                                 
+                                
+                               
                                 <script language="php">
                                 if(isset($_GET['skill'])){
                                     $skill=$_GET['skill'];
@@ -637,9 +628,7 @@
                                         });
                                     </script>
                                   </div>
-                                                        
-                            
-                            </div>
+                             </div>
                             <div class="tab-pane fade" id="v-pills-vidguk" role="tabpanel" aria-labelledby="v-pills-vidguk-tab"><p>статистикастатистикастатистикастатистикастатистика</p></div>
                             <div class="tab-pane fade" id="v-pills-port" role="tabpanel" aria-labelledby="v-pills-port-tab">
 
@@ -662,29 +651,96 @@
                                     </div>
                                   </div>
                               </div>
+                            </div>
+                            <div class="tab-pane fade" id="v-pills-zapis" role="tabpanel" aria-labelledby="v-pills-zapis-tab">
+
+
+                              <form action = "funct.php" method = "post">
+                                <fieldset>
+                                    <legend title = "ВНЕСЕННЯ КОНТАКТІВ" text-align = "left">ВНЕСЕННЯ КОНТАКТІВ</legend>
+                                    <div class = "form-group">
+                                        <input autocomplete = "off" type = "text" name = "name_company" placeholder = "КОМПАНІЯ" required>
+                                        <input autocomplete = "off" type = "text" name = "position" placeholder = "ПОСАДА" required>
+                                    </div>
+                                    <br>
+                                    <div>
+                                        <textarea placeholder = "РЕЗЮМЕ" autocomplete = "off" name = "the_resume" required></textarea>
+                                        <textarea placeholder = "ДЕТАЛІ" autocomplete = "off" name = "details" required></textarea>
+                                    </div>
+                                    <br>
+                                    <div>
+                                    <input autocomplete = "off" type = "text" name = "the_day" placeholder = "ЧИСЛО" required>
+                                    <input autocomplete = "off" type = "text" name = "the_month" placeholder = "МІСЯЦЬ ЦИФРАМИ" required>
+                                    <input type = "submit" value = "ЗБЕРЕГТИ">
+                                    </div>
+                                </fieldset>
+                            </form>
+                    
+                            <br>
+                    
+                            <script language="php">
+                                $servername = "localhost";
+                                $username = "root";
+                                $password = "";
+                                $dbname = "bazait";
+                            
+                                try{
+                                    $conn = new PDO("mysql:host = $servername; dbname = $dbname", $username, $password);
+                                    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                                }
+                                catch(PDOException $e){
+                                    echo "Falied - ".$e->getMessage();
+                                }
+                    
+                              </script>
+                    
+                            <form action = "<?php echo $_SERVER['PHP_SELF'];?>" method = "post">
+                                <fieldset>
+                                    <legend title = "Оберіть число і місяць" text-align = "left">ОБЕРІТЬ ЧИСЛО І МІСЯЦЬ</legend>
+                                    <div class = "form-group">
+                                        <input autocomplete = "off" type = "text" name = "theday" placeholder = "ЧИСЛО" required>
+                                        <input autocomplete = "off" type = "text" name = "themonth" placeholder = "МІСЯЦЬ ЦИФРАМИ" required>
+                                        <input type = "submit" name = "submit" value = "ВИВЕСТИ">
+                                    </div>
+                                </fieldset>
+                            </form>
+                    
+                            <br>
+                    
+                            <script language="php">
+                            if (isset($_POST['submit'])) {
+                            echo "<h3>Представлення контактів записника</h3>";
+                            $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                            $theday = $_POST["theday"];
+                            $themonth = $_POST["themonth"];
+                            $sql = "SELECT * FROM bazait.notebook WHERE the_day = '$theday' && the_month = '$themonth'";
+                            foreach ($conn->query($sql) as $row) {
+                                $name_company = $row['name_company'];
+                                $position = $row['position'];
+                                $the_resume = $row['the_resume'];
+                                $details = $row['details'];
+                                $the_day = $row['the_day'];
+                                $the_month = $row['the_month'];
+                                echo "<p>НАЗВА КОМПАНІЇ - $name_company &emsp; ПОСАДА - $position &emsp; РЕЗЮМЕ - $the_resume &emsp; ПОДРОБИЦІ - $details &emsp; ЧИСЛО - $the_day &emsp; МІСЯЦЬ - $the_month</p>";
+                            }
+                            $conn = null;
+                            } 
+                          </script>
+
 
                             </div>
-                          
-                           
                           </div>
                         </div>
                       </div>
                     </div>
                   </div>
-
-
-                </div>
-                </div>
-                      
-              
-              
-              
-                    
-                  </div>
                 </div>
               </div>
-        </div>
+            </div>
           </div>
+         </div>
+      </div>
+    </div>
   </div>
 </div>
 </div>
